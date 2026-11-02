@@ -1,30 +1,33 @@
-create database tareas;
+CREATE DATABASE IF NOT EXISTS tareas;
+USE tareas;
 
-use tareas;
 
-create table usuario (
-id int NOT NULL auto_increment,
-nombre varchar(15),
-email varchar(20),
-contraseña varchar(20),
-primary key (id)
+CREATE TABLE usuario (
+    id_usuario INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    email VARCHAR(50),
+    contraseña VARCHAR(50),
+    PRIMARY KEY (id_usuario)
 );
 
-create table prioridad (
-id int NOT NULL auto_increment,
-nombre varchar(40),
-descripcion varchar(100),
-primary key (id)
+CREATE TABLE prioridad (
+    id_prioridad INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(40),
+    descripcion VARCHAR(100),
+    PRIMARY KEY (id_prioridad)
 );
 
-create table tarea (
-id int NOT NULL auto_increment,
-foreign key (id) references usuario(id),
-foreign key (id) references prioridad(id),
-titulo varchar(20),
-descripcion varchar(100),
-estado boolean,
-fecha_creacion datetime,
-fecha_caducidad datetime,
-primary key (id)
-)
+
+CREATE TABLE tarea (
+    id_tarea INT NOT NULL AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    id_prioridad INT NOT NULL,
+    titulo VARCHAR(50),
+    descripcion VARCHAR(100),
+    estado VARCHAR(20),
+    fecha_creacion DATETIME,
+    fecha_caducidad DATETIME,
+    PRIMARY KEY (id_tarea),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_prioridad) REFERENCES prioridad(id_prioridad)
+);
